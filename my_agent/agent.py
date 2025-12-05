@@ -14,7 +14,7 @@ def load_students_data() -> str:
         reader = csv.DictReader(f)
         for row in reader:
             students.append(row)
-
+    
     data = "WORKSHOP ATTENDEES:\n\n"
     for s in students:
         data += f"- {s['name']} ({s['email']})\n"
@@ -38,10 +38,10 @@ STUDENT_DATA = load_students_data()
 
 # Create the ADK agent
 root_agent = Agent(
-    model="gemini-2.0-flash",
-    name="workshop_matchmaker",
-    description="Groups workshop attendees based on shared interests.",
-    instruction=f"""You are a workshop matchmaker. Group students into teams 
+    model='gemini-2.0-flash',
+    name='workshop_matchmaker',
+    description='Groups workshop attendees based on shared interests.',
+    instruction=f'''You are a workshop matchmaker. Group students into teams 
 based on their shared interests.
 
 RULES:
@@ -54,6 +54,6 @@ Here is the data of all workshop attendees:
 
 {STUDENT_DATA}
 
-Create meaningful groups and explain why each group should connect.""",
+Create meaningful groups and explain why each group should connect.''',
     output_schema=GroupsResponse,
 )
